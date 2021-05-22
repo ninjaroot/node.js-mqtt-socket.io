@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+  </head>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+  var socket = io();
+
+  socket.on("data",function(msg){
+      console.log(msg)
+      $("#show").append("<br>"+msg)
+  })
+
+  socket.on("error",function(msg){
+      console.log("error : " + msg)
+      
+  })
+
+  function connect() {
+      console.log($("#user").val())
+    socket.emit("login",$("#user").val())
+  }
+
+  function ppp() {
+      $("#show [name='welcome']").html("");
+  }
+</script>
+  
+<body>
+    <div id="show" >
+
+    </div>
+
+
+    <br>
+    <input type="text" id="user">
+    <br>
+    <button onclick="connect()" > connect</button>
+
+    
+  </body>
+</html>
